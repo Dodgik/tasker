@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Tasker</title>
+  <meta name="description" content="test-task" />
+
+  <meta name="Robots" content="INDEX,ALL" />
+  <meta name="YahooSeeker" content="INDEX, FOLLOW" />
+  <meta name="msnbot" content="INDEX, FOLLOW" />
+  <meta name="googlebot" content="INDEX, FOLLOW" />
+  <meta name="allow-search" content="yes" />
+  <meta name="revisit-after" content="daily" />
+  <meta name="Rating" content="General" />
+  <meta name="site" content="https://test.task" />
+  <meta name="distribution" content="global" />
+  <meta name="Copyright" content="" />
+
+  <meta name="theme-color" content="#0e5354" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+</head>
+
+<body>
+  <div id="body-wrap"></div>
+  <script>
+	var loggedIn = localStorage.getItem('logged_in') == '1';
+    window.__INITIAL_STATE__ = {
+      api: {
+        protocol: 'http',
+        host: 'localhost:3000',
+      },
+      user: {
+        displayName: loggedIn ? 'Admin' : 'Guest',
+        loggedIn: loggedIn,
+      },
+    };
+  </script>
+  <script>
+    window.app = {
+      apiHost: 'http://localhost:3000/'
+    };
+  </script>
+  <script src="/js/index.js"></script>
+</body>
+
+</html>

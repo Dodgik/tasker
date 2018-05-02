@@ -1,0 +1,8 @@
+.vs
+node_modules
+error.log
+server/config/config.ini
+server/config/config.json
+
+**/bin
+**/public

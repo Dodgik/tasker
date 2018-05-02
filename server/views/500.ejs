@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Error 500</title>
+</head>
+
+<body>
+  <h1>ERROR LOADING PAGE</h1>
+  <% if (settings['verbose errors']) { %>
+  <h2>Error: <%= error.message %></h2>
+  <pre><%= error.stack %></pre>
+  <% } %>
+</body>
+</html>
