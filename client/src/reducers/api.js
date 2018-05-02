@@ -1,6 +1,7 @@
 const api = {
   protocol: '',
   host: '',
+  apiHost: '',
 };
 
 export default (state = api, action) => {

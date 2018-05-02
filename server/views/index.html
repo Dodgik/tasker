@@ -15,34 +15,31 @@
   <meta name="allow-search" content="yes" />
   <meta name="revisit-after" content="daily" />
   <meta name="Rating" content="General" />
-  <meta name="site" content="https://test.task" />
+  <meta name="site" content="https://vasiliy.kl.com.ua" />
   <meta name="distribution" content="global" />
   <meta name="Copyright" content="" />
 
   <meta name="theme-color" content="#0e5354" />
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 </head>
 
 <body>
   <div id="body-wrap"></div>
   <script>
-	var loggedIn = localStorage.getItem('logged_in') == '1';
+	  var loggedIn = localStorage.getItem('logged_in') == '1';
     window.__INITIAL_STATE__ = {
       api: {
         protocol: 'http',
-        host: 'localhost:3000',
+        host: 'vasiliy.kl.com.ua',
         apiHost: 'https://uxcandy.com/~shapoval/test-task-backend'
       },
       user: {
         displayName: loggedIn ? 'Admin' : 'Guest',
         loggedIn: loggedIn,
       },
-    };
-  </script>
-  <script>
-    window.app = {
-      apiHost: 'http://localhost:3000/'
     };
   </script>
   <script src="/js/index.js"></script>

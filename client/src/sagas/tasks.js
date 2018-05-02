@@ -20,7 +20,7 @@ export function* fetchTasks(data) {
 }
 
 export function* watchFetchTask() {
-  yield takeEvery(actions.FETCH_TASKS, fetchTasks);
+  yield takeEvery(actions.FETCH_TASKS, fetchTasks)
 }
 
 
@@ -40,7 +40,7 @@ export function* addTask(data) {
 }
 
 export function* watchAddTask() {
-  yield takeEvery(actions.TASK_ADD, addTask);
+  yield takeEvery(actions.TASK_ADD, addTask)
 }
 
 
