@@ -31,12 +31,24 @@ class Create extends React.Component {
       this.setState(state);
     }
   }
+
+  handleUserName = (e) => {
+    this.setState({ username: e.target.value });
+  }
+
+  handleEmail = (e) => {
+    this.setState({ email: e.target.value });
+  }
+
+  handleText = (e) => {
+    this.setState({ text: e.target.value });
+  }
   
   togglePreview = () => {
     let task = {
-      username: this.refs.username.value,
-      email: this.refs.email.value,
-      text: this.refs.text.value,
+      username: this.state.username,
+      email: this.state.email,
+      text: this.state.text,
       src: this.state.src,
       image: this.refs.image.files[0],
     }
@@ -66,9 +78,9 @@ class Create extends React.Component {
 
   handleCreateClick = (e) => {
     const formData = new FormData();
-    formData.append('username', this.refs.username.value);
-    formData.append('email', this.refs.email.value);
-    formData.append('text', this.refs.text.value);
+    formData.append('username', this.state.username);
+    formData.append('email', this.state.email);
+    formData.append('text', this.state.text);
     
     const { width, height } = this.cropper.img;
     if (width > 320 || height > 240) {
@@ -101,7 +113,7 @@ class Create extends React.Component {
 
   handleCloseClick = () => {
     this.props.previewTask(null);
-  };
+  }
   
   render() {
     const error = this.props.actionTask.error;
@@ -113,7 +125,7 @@ class Create extends React.Component {
             <div className="input-group-prepend">
               <span className="input-group-text" style={{'minWidth': '110px'}}>User Name</span>
             </div>
-            <input type="text" ref="username" defaultValue={this.state.username}
+            <input type="text" value={this.state.username} onChange={this.handleUserName}
               className={error && error.username ? ("form-control is-invalid") : ("form-control")} />
             {error && error.username && (<div className="invalid-feedback">{error.username}</div>)}
           </div>
@@ -121,7 +133,7 @@ class Create extends React.Component {
             <div className="input-group-prepend">
               <span className="input-group-text" style={{'minWidth': '110px'}}>Email</span>
             </div>
-            <input type="text" ref="email" defaultValue={this.state.email}
+            <input type="text" value={this.state.email} onChange={this.handleEmail}
               className={error && error.email ? ("form-control is-invalid") : ("form-control")} />
             {error && error.email && (<div className="invalid-feedback">{error.email}</div>)}
           </div>
@@ -131,7 +143,7 @@ class Create extends React.Component {
             </div>
             <div className="custom-file">
               <input type="file" ref="image" id="taskCreateImage" accept=".jpg,.gif,.png"
-                onChange={this.handleFileChange.bind(true)}
+                onChange={this.handleFileChange}
                 className={error && error.image ? ("custom-file-input is-invalid") : ("custom-file-input")} />
               <label className="custom-file-label" htmlFor="taskCreateImage">
                 {this.state.src ? (
@@ -155,17 +167,16 @@ class Create extends React.Component {
             </div>
             <textarea
               className={error && error.text ? ("form-control is-invalid") : ("form-control")}
-              ref="text" rows="3" placeholder="Text"
-              defaultValue={this.state.text} >
+              rows="3" placeholder="Text" value={this.state.text} onChange={this.handleText} >
             </textarea>
             {error && error.text && (<div className="invalid-feedback">{error.text}</div>)}
           </div>
         </div>
         <div className="card-footer">
           <div className="btn-group justify-content-center w-100">
-            <button type="button" className="btn btn-primary font-weight-bold" onClick={this.handleCreateClick.bind(true)}>Create</button>
-            <button type="button" className="btn btn-light font-weight-bold" onClick={this.togglePreview.bind(true)}>Preview</button>
-            <Link to="/" className="btn btn-secondary font-weight-bold" onClick={this.handleCloseClick.bind(true)}>Cancel</Link>
+            <button type="button" className="btn btn-primary font-weight-bold" onClick={this.handleCreateClick}>Create</button>
+            <button type="button" className="btn btn-light font-weight-bold" onClick={this.togglePreview}>Preview</button>
+            <Link to="/" className="btn btn-secondary font-weight-bold" onClick={this.handleCloseClick}>Cancel</Link>
           </div>
         </div>
       </div>
@@ -189,4 +200,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Create));
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

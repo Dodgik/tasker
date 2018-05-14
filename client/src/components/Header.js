@@ -1,11 +1,11 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as userActions from '../actions/user_actions';
 
 
 class Header extends Component {
-  handleLogout(e) {
+  handleLogout = (e) => {
     e.preventDefault();
     this.props.logoutSend();
     return false;
@@ -20,7 +20,7 @@ class Header extends Component {
         </div>
         <div className="col-md-4 mt-1 text-right">
           {this.props.loggedIn ? (
-            <a href="#" className="font-weight-bold m-2 text-dark" onClick={this.handleLogout.bind(this)}>Logout</a>
+            <a href="#" className="font-weight-bold m-2 text-dark" onClick={this.handleLogout}>Logout</a>
           ):(
             <Link to="/login" className="font-weight-bold m-2 text-dark">Login</Link>
           )}

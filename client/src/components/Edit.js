@@ -33,13 +33,13 @@ class Edit extends React.Component {
       text: this.state.text.replace(/(\r\n|\n|\r)/gm, ' '),
     };
     this.props.setTask(task);
-  };
+  }
 
-  handleChangeText(e) {
+  handleChangeText = (e) => {
     this.setState({ text: e.target.value });
   }
 
-  handleChangeStatus(e) {
+  handleChangeStatus = (e) => {
     const value = e.target.checked ? 10 : 0;
     this.setState({ status: value });
   }
@@ -84,7 +84,7 @@ class Edit extends React.Component {
               className={error ? ("form-control is-invalid") : ("form-control")}
               rows="3" placeholder="Text"
               defaultValue={this.state.text}
-              onChange={this.handleChangeText.bind(this)}>
+              onChange={this.handleChangeText}>
             </textarea>
             {error && (<div className="invalid-feedback">{error}</div>)}
           </div>
@@ -96,7 +96,7 @@ class Edit extends React.Component {
               <div className="custom-control custom-checkbox">
                 <input type="checkbox" className="custom-control-input" id="statusEdit"
                   defaultChecked={this.state.status}
-                  onChange={this.handleChangeStatus.bind(this)} />
+                  onChange={this.handleChangeStatus} />
                 <label className="custom-control-label ml-1" htmlFor="statusEdit">DONE</label>
               </div>
             </div>
@@ -104,7 +104,7 @@ class Edit extends React.Component {
         </div>
         <div className="card-footer">
           <div className="btn-group justify-content-center w-100">
-            <button type="button" className="btn btn-primary font-weight-bold" onClick={this.handleEditClick.bind(true)}>Save</button>
+            <button type="button" className="btn btn-primary font-weight-bold" onClick={this.handleEditClick}>Save</button>
             <Link to="/" className="btn btn-secondary font-weight-bold">Cancel</Link>
           </div>
         </div>

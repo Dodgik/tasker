@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -15,21 +15,11 @@ class App extends Component {
       <div className="app-root">
         <Header />
           
-        <Route exact path="/" render={(props) => (
-          <Home {...props} />
-        )} />
-        <Route exact path="/create" render={(props) => (
-          <Create {...props} />
-        )} />
-        <Route exact path="/login" render={(props) => (
-          <Login {...props} />
-        )} />
-        <Route path="/edit/:id" render={(props) => (
-          <Edit {...props} />
-        )} />
-        <Route path="/preview/" render={(props) => (
-          <View {...props} />
-        )} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/create" component={Create} />
+        <Route exact path="/login" component={Login} />
+        <Route path="/edit/:id" component={Edit} />
+        <Route path="/preview/" component={View} />
       </div>
     );
   }
