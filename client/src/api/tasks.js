@@ -1,15 +1,7 @@
-import { call, select } from 'redux-saga/effects'
 import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 import MD5 from 'md5.js'
 
-const selectApiParams = state => state.api
-
-function* getApiParams() {
-  const apiParams = yield select(selectApiParams);
-
-  return apiParams;
-}
 
 const getProps = {
   method: 'GET',
