@@ -32,16 +32,8 @@ class Create extends React.Component {
     }
   }
 
-  handleUserName = (e) => {
-    this.setState({ username: e.target.value });
-  }
-
-  handleEmail = (e) => {
-    this.setState({ email: e.target.value });
-  }
-
-  handleText = (e) => {
-    this.setState({ text: e.target.value });
+  handleField = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
   
   togglePreview = () => {
@@ -50,7 +42,7 @@ class Create extends React.Component {
       email: this.state.email,
       text: this.state.text,
       src: this.state.src,
-      image: this.refs.image.files[0],
+      image: this.state.image,
     }
     this.props.previewTask(task);
     this.props.history.push('/preview');
@@ -76,7 +68,26 @@ class Create extends React.Component {
     return { width: newWidth, height: newHeight };
   }
 
-  handleCreateClick = (e) => {
+  handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.setState({
+          src: event.target.result,
+          image: image,
+        });
+      }
+      reader.readAsDataURL(image);
+    }
+  }
+
+  handleCloseClick = () => {
+    this.props.previewTask(null);
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('username', this.state.username);
     formData.append('email', this.state.email);
@@ -91,41 +102,22 @@ class Create extends React.Component {
         this.props.addTask(formData);
       });
     } else {
-      const image = this.refs.image.files[0] || this.state.image;
-      formData.append('image', image);
+      formData.append('image', this.state.image);
       this.props.addTask(formData);
     }
-  }
-
-  handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const image = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.setState({
-          src: event.target.result,
-          image: image,
-        });
-      }
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
-
-  handleCloseClick = () => {
-    this.props.previewTask(null);
   }
   
   render() {
     const error = this.props.actionTask.error;
     return (
-      <div className="card border-dark">
+      <form onSubmit={this.onSubmit} className="card border-dark">
         <h5 className="card-header">Create task</h5>
         <div className="card-body">
           <div className="input-group mb-2">
             <div className="input-group-prepend">
               <span className="input-group-text" style={{'minWidth': '110px'}}>User Name</span>
             </div>
-            <input type="text" value={this.state.username} onChange={this.handleUserName}
+            <input type="text" name="username" value={this.state.username} onChange={this.handleField}
               className={error && error.username ? ("form-control is-invalid") : ("form-control")} />
             {error && error.username && (<div className="invalid-feedback">{error.username}</div>)}
           </div>
@@ -133,7 +125,7 @@ class Create extends React.Component {
             <div className="input-group-prepend">
               <span className="input-group-text" style={{'minWidth': '110px'}}>Email</span>
             </div>
-            <input type="text" value={this.state.email} onChange={this.handleEmail}
+            <input type="text" name="email" value={this.state.email} onChange={this.handleField}
               className={error && error.email ? ("form-control is-invalid") : ("form-control")} />
             {error && error.email && (<div className="invalid-feedback">{error.email}</div>)}
           </div>
@@ -142,8 +134,7 @@ class Create extends React.Component {
               <span className="input-group-text" style={{'minWidth': '110px'}}>Image</span>
             </div>
             <div className="custom-file">
-              <input type="file" ref="image" id="taskCreateImage" accept=".jpg,.gif,.png"
-                onChange={this.handleFileChange}
+              <input type="file" id="taskCreateImage" accept=".jpg,.gif,.png" onChange={this.handleFileChange}
                 className={error && error.image ? ("custom-file-input is-invalid") : ("custom-file-input")} />
               <label className="custom-file-label" htmlFor="taskCreateImage">
                 {this.state.src ? (
@@ -154,12 +145,7 @@ class Create extends React.Component {
               </label>
             </div>
             {error && error.image && (<div className="invalid-feedback d-block">{error.image}</div>)}
-            <Cropper
-              style={{ display: 'none' }}
-              guides={false}
-              src={this.state.src}
-              ref={cropper => { this.cropper = cropper; }}
-            />
+            <Cropper style={{ display: 'none' }} src={this.state.src} ref={cropper => { this.cropper = cropper; }} />
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
@@ -167,19 +153,19 @@ class Create extends React.Component {
             </div>
             <textarea
               className={error && error.text ? ("form-control is-invalid") : ("form-control")}
-              rows="3" placeholder="Text" value={this.state.text} onChange={this.handleText} >
+              rows="3" placeholder="Text" name="text" value={this.state.text} onChange={this.handleField} >
             </textarea>
             {error && error.text && (<div className="invalid-feedback">{error.text}</div>)}
           </div>
         </div>
         <div className="card-footer">
           <div className="btn-group justify-content-center w-100">
-            <button type="button" className="btn btn-primary font-weight-bold" onClick={this.handleCreateClick}>Create</button>
+            <button type="submit" className="btn btn-primary font-weight-bold">Create</button>
             <button type="button" className="btn btn-light font-weight-bold" onClick={this.togglePreview}>Preview</button>
             <Link to="/" className="btn btn-secondary font-weight-bold" onClick={this.handleCloseClick}>Cancel</Link>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
