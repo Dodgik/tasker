@@ -1,14 +1,18 @@
-/* eslint-disable no-constant-condition */
 import { take, put, call, fork, select, takeEvery } from 'redux-saga/effects'
 import * as actions from '../actions/tasks_actions'
 
 import api from '../api'
 
 
+export function* apiTasks(method, data) {
+  const apiParams = yield select(state => state.api)
+  return yield call(api.tasks[method], data, apiParams)
+}
+
 export function* fetchTasks(data) {
   yield put(actions.requestTasks())
   try {
-    const { response, error } = yield call(api.tasks.all, data.params)
+    const { response, error } = yield call(apiTasks, 'all', data.params)
     if (response) {
       yield put(actions.receiveTasks(response))
     } else {
@@ -28,7 +32,7 @@ export function* watchFetchTask() {
 export function* addTask(data) {
   yield put(actions.requestAddTask(data.task))
   try {
-    const { response, error } = yield call(api.tasks.add, data.task)
+    const { response, error } = yield call(apiTasks, 'add', data.task)
     if (response) {
       yield put(actions.receiveAddTask(response))
     } else {
@@ -47,7 +51,7 @@ export function* watchAddTask() {
 export function* setTask(data) {
   yield put(actions.requestSetTask(data.task))
   try {
-    const { response, error } = yield call(api.tasks.set, data.task)
+    const { response, error } = yield call(apiTasks, 'set', data.task)
     if (response) {
       yield put(actions.receiveSetTask(response))
     } else {

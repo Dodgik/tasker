@@ -12,9 +12,8 @@ const postProps = {
   headers: { 'Content-Type': 'application/json' },
 };
 
-const fetchWrap = (path, props = postProps, query = '') => {
-  const apiHost = 'https://uxcandy.com/~shapoval/test-task-backend';
-  const developer = 'admin123';
+const fetchWrap = (path, props = postProps, query = '', apiParams) => {
+  const { apiHost, developer } = apiParams;
   
   let response;
   return fetch(`${apiHost}${path}?developer=${developer}&${query}`, props)
@@ -35,28 +34,28 @@ const fetchWrap = (path, props = postProps, query = '') => {
     });
 }
 
-const fetchPOST = (path, data) => {
+const fetchPOST = (path, data, apiParams) => {
   const initProps = data ? Object.assign(postProps, { body: JSON.stringify(data) }) : postProps;
-  return fetchWrap(path, initProps);
+  return fetchWrap(path, initProps, apiParams);
 }
 
-const fetchGET = (path, data) => {
+const fetchGET = (path, data, apiParams) => {
   const query = queryString.stringify(data);
-  return fetchWrap(path, getProps, query);
+  return fetchWrap(path, getProps, query, apiParams);
 }
 
-export const all = (data) => {
-  return fetchGET('/', data);
+export const all = (data, apiParams) => {
+  return fetchGET('/', data, apiParams);
 }
 
-export const add = (formData) => {
+export const add = (formData, apiParams) => {
   return fetchWrap(`/create/`, {
     method: 'POST',
     body: formData,
-  });
+  }, apiParams);
 }
 
-export const set = (data) => {
+export const set = (data, apiParams) => {
   const { id, status, text } = data;
   const token = 'beejee';
   const query = queryString.stringify({ status, text, token });
@@ -71,5 +70,5 @@ export const set = (data) => {
   return fetchWrap(`/edit/${id}`, {
     method: 'POST',
     body: formData,
-  });
+  }, apiParams);
 }

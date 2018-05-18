@@ -10,7 +10,8 @@ let defaultConfig = {
   "protocol": "http",
   "host": "localhost:3000",
 
-  "maps_api_key": "",
+  "apiHost": "",
+  "developer": "",
 
   "session_secret": "local-dev-ss",
   "session_name": "vas",

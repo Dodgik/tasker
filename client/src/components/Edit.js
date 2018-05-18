@@ -52,33 +52,33 @@ class Edit extends React.Component {
         <div className="card-body">
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Task</span>
+              <span className="input-group-text input-min-width">Task</span>
             </div>
             <span className="form-control">{this.state.id}</span>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>User Name</span>
+              <span className="input-group-text input-min-width">User Name</span>
             </div>
             <span className="form-control">{this.state.username}</span>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Email</span>
+              <span className="input-group-text input-min-width">Email</span>
             </div>
             <span className="form-control">{this.state.email}</span>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Image</span>
+              <span className="input-group-text input-min-width">Image</span>
             </div>
             <div className="form-control">
-              <img src={this.state.image_path} className="rounded" style={{'width': '320px', 'height': '240px'}} alt="..."/>
+              <img src={this.state.image_path} className="rounded image-preview" alt="..."/>
             </div>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Text</span>
+              <span className="input-group-text input-min-width">Text</span>
             </div>
             <textarea
               className={error ? ("form-control is-invalid") : ("form-control")}
@@ -90,7 +90,7 @@ class Edit extends React.Component {
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Status</span>
+              <span className="input-group-text input-min-width">Status</span>
             </div>
             <div className="form-control">
               <div className="custom-control custom-checkbox">

@@ -28,33 +28,33 @@ class View extends React.Component {
         <div className="card-body">
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>User Name</span>
+              <span className="input-group-text input-min-width">User Name</span>
             </div>
             <span className="form-control">{this.state.username}</span>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Email</span>
+              <span className="input-group-text input-min-width">Email</span>
             </div>
             <span className="form-control">{this.state.email}</span>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Image</span>
+              <span className="input-group-text input-min-width">Image</span>
             </div>
             <div className="form-control">
-              {src && <img src={src} className="rounded" style={{ 'width': '320px', 'height': '240px' }} alt="..." />}
+              {src && <img src={src} className="rounded image-preview" alt="..." />}
             </div>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Text</span>
+              <span className="input-group-text input-min-width">Text</span>
             </div>
             <span className="form-control" style={{'height': '86px'}}>{this.state.text}</span>
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Status</span>
+              <span className="input-group-text input-min-width">Status</span>
             </div>
             <div className="form-control">{this.state.status ? 'DONE' : 'TODO'}</div>
           </div>

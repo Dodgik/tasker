@@ -115,7 +115,7 @@ class Create extends React.Component {
         <div className="card-body">
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>User Name</span>
+              <span className="input-group-text input-min-width">User Name</span>
             </div>
             <input type="text" name="username" value={this.state.username} onChange={this.handleField}
               className={error && error.username ? ("form-control is-invalid") : ("form-control")} />
@@ -123,7 +123,7 @@ class Create extends React.Component {
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Email</span>
+              <span className="input-group-text input-min-width">Email</span>
             </div>
             <input type="text" name="email" value={this.state.email} onChange={this.handleField}
               className={error && error.email ? ("form-control is-invalid") : ("form-control")} />
@@ -131,14 +131,14 @@ class Create extends React.Component {
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Image</span>
+              <span className="input-group-text input-min-width">Image</span>
             </div>
             <div className="custom-file">
               <input type="file" id="taskCreateImage" accept=".jpg,.gif,.png" onChange={this.handleFileChange}
                 className={error && error.image ? ("custom-file-input is-invalid") : ("custom-file-input")} />
               <label className="custom-file-label" htmlFor="taskCreateImage">
                 {this.state.src ? (
-                  <img src={this.state.src} className="rounded" style={{'width': '26px', 'height': '26px'}} alt="..." ref="imagePreview"/>
+                  <img src={this.state.src} className="rounded image-upload-preview" alt="..." ref="imagePreview"/>
                 ) : (
                   "Choose image"
                 )}
@@ -149,7 +149,7 @@ class Create extends React.Component {
           </div>
           <div className="input-group mb-2">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{'minWidth': '110px'}}>Text</span>
+              <span className="input-group-text input-min-width">Text</span>
             </div>
             <textarea
               className={error && error.text ? ("form-control is-invalid") : ("form-control")}

@@ -46,7 +46,8 @@ function rootHandler(req, res) {
     api: {
       protocol: config.protocol,
       host: config.host,
-      maps_api_key: config.maps_api_key,
+      apiHost: config.apiHost,
+      developer: config.developer,
     }
   };
   if (req.isAuthenticated()) {
